@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${package}.${projectName}.mapper.dao.${className}Mapper">
+    <resultMap id="BaseResultMap" type="${package}.${projectName}.mapper.entity.${className}">
+#foreach($column in $columns)
+        <result property="${column.attrname}"  jdbcType="${column.upDataType}" column="${column.columnName}"/>
+#end
+    </resultMap>
+	<sql id="Base_Column_List">	
+#foreach($column in $columns)		
+       ${column.columnName}#if($velocityCount != $columns.size()),#end 
+#end    
+ 	</sql>	 	
+ 	<select id="selectByPrimaryKey" parameterType="java.lang.${pk.attrType}" resultMap="BaseResultMap">
+ 	 select 
+    <include refid="Base_Column_List" />
+    from ${tableName}
+    where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.upDataType}}
+  </select>
+   <delete id="deleteByPrimaryKey" parameterType="java.lang.${pk.attrType}">
+    delete from ${tableName}
+    where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.upDataType}}
+  </delete>
+   <insert id="insert" parameterType="${package}.${projectName}.mapper.entity.${className}">
+    <selectKey keyProperty="${pk.attrname}" order="AFTER" resultType="java.lang.${pk.attrType}">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into ${tableName} (
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+		 ${column.columnName}#if($velocityCount != $columns.size()),#end 
+	#end
+#end  
+      )
+    values (
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+		 #{${column.attrname},jdbcType=${column.upDataType}}#if($velocityCount != $columns.size()),#end 
+	#end
+#end  
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="${package}.${projectName}.mapper.entity.${className}">
+  #if($pk.upDataType!="VARCHAR")
+		  <selectKey keyProperty="${pk.attrname}" order="AFTER" resultType="java.lang.${pk.attrType}">
+      SELECT LAST_INSERT_ID()
+	#end
+     #if($pk.upDataType=="VARCHAR")
+			<selectKey keyProperty="${pk.attrname}" order="BEFORE" resultType="java.lang.String">
+			select replace(uuid(),'-','')
+	#end
+    </selectKey>
+    insert into ${tableName}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+	 <if test="${column.attrname} != null">
+        ${column.columnName},
+      </if> 		 
+	#end     
+#end 
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+	 <if test="${column.attrname} != null">
+        #{${column.attrname},jdbcType=${column.upDataType}},
+      </if>		 
+	#end     
+#end
+    </trim>
+  </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="${package}.${projectName}.mapper.entity.${className}">
+    update ${tableName}
+    <set>
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+	  <if test="${column.attrname} != null">
+        #{${column.attrname},jdbcType=${column.upDataType}},
+      </if>		 
+	#end     
+#end 
+    </set>
+    where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.upDataType}}
+  </update>
+   <update id="updateByPrimaryKey" parameterType="${package}.${projectName}.mapper.entity.${className}">
+    update ${tableName} set
+#foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName)
+	  ${column.columnName} = #{${column.attrname},jdbcType=${column.upDataType}}#if($velocityCount != $columns.size()),#end 
+	#end
+#end
+
+    where ${pk.columnName} = #{${pk.attrname},jdbcType=${pk.upDataType}}
+  </update>
+  <select id="queryList" parameterType="${package}.${projectName}.dto.${className}QueryDto"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from ${tableName} 
+		<where>  1=1 
+#foreach($column in $columns)		
+		<if test="${column.attrname} != null">
+			and ${column.columnName} = #{${column.attrname},jdbcType=${column.upDataType}} 
+		</if>  
+#end 
+	   </where>      
+	</select>
+</mapper>

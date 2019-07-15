@@ -1,0 +1,117 @@
+/** 
+ * 文件名：      ${className}Client.java
+ * @author:     ${author}
+ * @最后修改人： ${author} 
+ * @最后修改日期:${datetime}
+ * @version:    1.0
+ * Copyright 蜀海(北京)供应链管理有限公司 Corporation 2018
+ */ 
+package ${package}.${projectName}.consumer;
+
+import java.util.Map;
+
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ${package}.${projectName}.consumer.hystrix.${className}Hystrix;
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.dto.${className}QueryDto;
+import com.shsc.paas.commons.ResultInfo;
+
+@FeignClient(value = "${projectName}-controller", fallback = ${className}Hystrix.class)
+public interface ${className}Client {
+
+	/**
+	 * 
+	 * 此方法描述的是：根据ID查询${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryById
+	 * @param ${classname}Id
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/queryById")
+	public ResultInfo<?> queryById(@RequestBody ${className}Dto ${classname}Dto);
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：${comments}列表
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryList
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/queryList")
+	public ResultInfo<?> queryList(@RequestBody ${className}QueryDto ${classname}Dto);
+	/**
+	 * 
+	 * 此方法描述的是：添加${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * save
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/save")
+	public ResultInfo<?> save(@RequestBody  ${className}Dto  ${classname}Dto);
+	/**
+	 * 
+	 * 此方法描述的是：编辑${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * update
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/update")
+	public ResultInfo<?> update(@RequestBody ${className}Dto ${classname}Dto);
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID删除${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delById
+	 * @param param
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/delById")
+	public ResultInfo<?> delById(@RequestBody Map<String, String> param);
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID批量删除${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delByIds
+	 * @param map
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/${classname}/delByIds")
+	public ResultInfo<?> delByIds(@RequestBody Map<String, Object> map);
+	
+	
+	
+}

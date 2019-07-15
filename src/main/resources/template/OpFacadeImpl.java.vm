@@ -1,0 +1,97 @@
+/** 
+ * 文件名：${className}OpFacadeImpl.java
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+package ${package}.${projectName}.facade.impl;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.facade.${className}OpFacade;
+import ${package}.${projectName}.facade.ShiroUtils;
+import ${package}.${projectName}.mapper.dao.${className}Mapper;
+import ${package}.${projectName}.mapper.entity.${className};
+import com.shsc.paas.commons.ResultInfo;
+import com.shsc.paas.commons.base.BaseOpFacade;
+import com.shsc.paas.commons.utils.BeanUtil;
+import com.shsc.paas.commons.utils.DateUtil;
+
+@Service
+public class ${className}OpFacadeImpl extends BaseOpFacade implements ${className}OpFacade {
+
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;	
+
+	@Override
+	public ResultInfo<?> delById(String userId, String id) {
+		${className} ${classname} = ${classname}Mapper.selectByPrimaryKey(id);
+		${classname}.setIsDel(true);
+		${classname}.setUpdateTime(DateUtil.getCurrent());
+		${classname}.setUpdateBy(userId);
+		int num = ${classname}Mapper.updateByPrimaryKeySelective(${classname});
+		if (num == 0) {
+			return ResultInfo.fail("删除失败");
+		} else {
+			return ResultInfo.success("删除成");
+		}
+	}
+
+	@Override
+	public ResultInfo<?> save(${className}Dto ${classname}Dto) {
+		${className} ${classname} = new ${className}();
+		BeanUtil.copyProperties(${classname}Dto, ${classname});
+		${classname}.setCreateTime(DateUtil.getCurrent());
+		${classname}.setIsDel(false);		
+		int num = ${classname}Mapper.insertSelective(${classname});
+		if (num == 0) {
+			return ResultInfo.fail("保存失败");
+		} else {
+			return ResultInfo.success("保存成功");
+		}
+	}
+
+	@Override
+	public ResultInfo<?> update(${className}Dto ${classname}Dto) {
+		${className} ${classname} = new ${className}();
+		BeanUtil.copyProperties(${classname}Dto, ${classname});
+		${classname}.setUpdateTime(DateUtil.getCurrent());
+		int num = ${classname}Mapper.updateByPrimaryKeySelective(${classname});
+		if (num > 0) {
+			return ResultInfo.success("编辑成功");
+		} else {
+			return ResultInfo.fail("编辑失败");
+		}
+	}
+
+	public ResultInfo<?> delByIds(String userId, List<String> ids) {
+		if (StringUtils.isEmpty(userId)) {
+			return ResultInfo.fail("用户ID不能为空");
+		}
+		int count = 0;
+		if (null != ids) {
+			for (String id:ids) {
+				${className} ${classname} = new ${className}();
+				${classname}.set${pk.attrName}(id);
+				${classname}.setUpdateTime(DateUtil.getCurrent());
+				${classname}.setUpdateBy(userId);
+				${classname}.setIsDel(true);
+				int num = ${classname}Mapper.updateByPrimaryKeySelective(${classname});
+				if(num>0) {
+					count++;
+				}
+			}
+		}
+
+		return ResultInfo.success("成功删除"+count+"条数据");
+	}
+
+}

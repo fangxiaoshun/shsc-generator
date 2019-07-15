@@ -1,0 +1,26 @@
+/** 
+ * 文件名：${className}OpFacade.java
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+package ${package}.${projectName}.facade;
+
+import java.util.Map;
+
+import ${package}.${projectName}.dto.${className}Dto;
+import com.shsc.paas.commons.ResultInfo;
+
+public interface ${className}OpFacade {
+
+	 
+	ResultInfo<?> delById(String userId, String id);
+
+	ResultInfo<?> save(${className}Dto ${classname}Dto);
+
+	ResultInfo<?> update(${className}Dto ${classname}Dto);	
+
+	ResultInfo<?> delByIds(String userId, List<String> ids);
+
+}

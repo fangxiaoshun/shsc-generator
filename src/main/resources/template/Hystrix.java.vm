@@ -1,0 +1,65 @@
+/** 
+ * 文件名：${className}Hystrix.java
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限公司 Corporation 2018
+ */
+package ${package}.${projectName}.consumer.hystrix;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import ${package}.${projectName}.consumer.${className}Client;
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.dto.${className}QueryDto;
+import com.shsc.paas.commons.ResultInfo;
+
+/**
+ * 
+ * 此类的描述： ${comments}断路器
+ * 
+ * @author: ${author} @最后修改人： ${author}
+ * @最后修改日期:${datetime}
+ * @version: 1.0
+ */
+@Component
+public class ${className}Hystrix implements ${className}Client {
+
+	@Override
+	public ResultInfo<?> queryById(${className}Dto ${classname}Dto) {
+
+		return ResultInfo.fail("系统内部异常");
+	}
+
+	@Override
+	public ResultInfo<?> queryList(${className}QueryDto ${classname}Dto) {
+
+		return ResultInfo.fail("系统内部异常");
+	}
+
+	@Override
+	public ResultInfo<?> save(${className}Dto ${classname}Dto) {
+
+		return ResultInfo.fail("系统内部异常");
+	}
+
+	@Override
+	public ResultInfo<?> update(${className}Dto ${classname}Dto) {
+
+		return ResultInfo.fail("系统内部异常");
+	}	
+
+	@Override
+	public ResultInfo<?> delById(Map<String, String> param) {
+
+		return ResultInfo.fail("系统内部异常");
+	}
+
+	@Override
+	public ResultInfo<?> delByIds(Map<String, Object> map) {
+
+		return ResultInfo.fail("系统内部异常");
+	}
+}

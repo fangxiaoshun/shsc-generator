@@ -1,0 +1,56 @@
+/** 
+ * 文件名：${className}QueryFacadeImpl.java
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+package ${package}.${projectName}.facade.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.dto.${className}QueryDto;
+import ${package}.${projectName}.facade.${className}QueryFacade;
+import ${package}.${projectName}.mapper.dao.${className}Mapper;
+import ${package}.${projectName}.mapper.entity.${className};
+import com.shsc.paas.commons.ResultInfo;
+import com.shsc.paas.commons.base.BaseQueryFacade;
+import com.shsc.paas.commons.utils.BeanUtil;
+@Service
+public class ${className}QueryFacadeImpl extends BaseQueryFacade implements ${className}QueryFacade {
+
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;
+	@Override
+	public ResultInfo<?> queryById(${className}Dto ${classname}Dto) {
+		if(${classname}Dto==null||StringUtils.isEmpty(${classname}Dto.get${className}Id())) {
+			return ResultInfo.fail("参数不能为空");
+		}
+		${className} ${classname} = ${classname}Mapper.selectByPrimaryKey(${classname}Dto.get${className}Id());
+		if(${classname}==null) {
+			return ResultInfo.fail("数据不存在");
+		}
+		BeanUtil.copyProperties(${classname}, ${classname}Dto);
+		return ResultInfo.success(${classname}Dto);
+	}
+
+	@Override
+	public ResultInfo<?> queryList(${className}QueryDto ${classname}Dto) {
+		PageHelper.startPage(${classname}Dto.getPageNum(), ${classname}Dto.getPageSize());
+		List<${className}> list = ${classname}Mapper.queryList(${classname}Dto);	
+		PageInfo<?> pageInfo = new PageInfo<>(list);
+		return ResultInfo.success(pageInfo);
+	}
+ 
+
+	
+
+  
+}

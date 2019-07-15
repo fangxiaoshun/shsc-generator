@@ -1,0 +1,152 @@
+/** 
+ * 文件名：      ${className}Controller.java
+ * @author:     ${author}
+ * @最后修改人： ${author} 
+ * @最后修改日期:${datetime}
+ * @version:    1.0
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */ 
+package ${package}.bpaas.consumer.controller;
+
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shsc.bpaas.idm.consumer.${className}Client;
+import com.shsc.bpaas.idm.dto.${className}Dto;
+import com.shsc.bpaas.idm.dto.${className}QueryDto;
+import com.shsc.paas.commons.ResultInfo;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+/**
+ * 
+ * 此类的描述： ${comments}
+ * @author:     ${author}
+ * @最后修改人： ${author}
+ * @最后修改日期:${datetime}
+ * @version:    1.0
+ */
+@Api(value="${comments}",tags={"${comments}"})
+@RestController
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+	@Autowired
+	private ${className}Client ${classname}Client;
+
+
+	/**
+	 * 
+	 * 此方法描述的是：根据ID查询${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryById
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "根据ID查询", notes = "根据ID查询") 
+	@RequestMapping(value = "/queryById", method = RequestMethod.POST)
+	public ResultInfo<?> queryById(@RequestBody ${className}Dto ${classname}Dto) {
+		return ${classname}Client.queryById(${classname}Dto);
+	}
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：${comments}列表
+	 * @author:     ${author}
+	 * @最后修改人：${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryList
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "列表查询", notes = "列表查询") 
+	@RequestMapping(value = "/queryList", method = RequestMethod.POST)
+	public ResultInfo<?> queryList(@RequestBody ${className}QueryDto ${classname}Dto) {
+		return ${classname}Client.queryList(${classname}Dto);
+	}
+	/**
+	 * 
+	 * 此方法描述的是：添加${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * save
+	 * @param subsystem
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "添加${comments}", notes = "添加${comments}") 
+	@RequestMapping(value = "/save", method = RequestMethod.POST)
+	public ResultInfo<?> save(@RequestBody ${className}Dto ${classname}) {
+		return ${classname}Client.save(${classname});
+	}
+	/**
+	 * 
+	 * 此方法描述的是：编辑${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * update
+	 * @param subsystem
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "编辑${comments}", notes = "编辑${comments}") 
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ResultInfo<?> update(@RequestBody ${className}Dto ${classname}) {
+		return ${classname}Client.update(${classname});
+	}
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID删除${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delById
+	 * @param param
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "根据ID删除", notes = "根据ID删除") 
+	@RequestMapping(value = "/delById", method = RequestMethod.POST)
+	public ResultInfo<?> delById(@RequestBody Map<String, String> param) {
+		return ${classname}Client.delById(param);
+	}
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID批量删除${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delByIds
+	 * @param map
+	 * @return ResultInfo<?>
+	 */
+	@ApiOperation(value = "根据ID批量删除", notes = "根据ID批量删除") 
+	@RequestMapping(value = "/delByIds", method = RequestMethod.POST)
+	public ResultInfo<?> delByIds(@RequestBody Map<String, Object> map) {
+		return ${classname}Client.delByIds(map);
+	}
+	
+}

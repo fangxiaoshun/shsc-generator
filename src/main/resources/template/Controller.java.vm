@@ -1,0 +1,138 @@
+package ${package}.${projectName}.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.facade.${className}OpFacade;
+import ${package}.${projectName}.facade.${className}QueryFacade;
+import com.shsc.paas.commons.ResultInfo;
+
+/** 
+ * 文件名：${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+@RestController
+@RequestMapping("/${classname}")
+public class ${className}Controller {
+	@Autowired
+	private ${className}QueryFacade ${classname}QueryFacade;
+
+	@Autowired
+	private ${className}OpFacade ${classname}OpFacade;
+
+	/**
+	 * 
+	 * 此方法描述的是：根据ID查询${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryById
+	 * @param systemId
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/queryById")
+	public ResultInfo<?> queryById(@RequestBody ${className}Dto ${classname}) {
+		return ${className}QueryFacade.queryById(${classname}.getSystemId());
+	}
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：${comments}列表
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * queryList
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/queryList")
+	public ResultInfo<?> queryList(@RequestBody ${className}Dto ${classname}Dto) {
+		return ${classname}QueryFacade.queryList(${classname}Dto);
+	}
+	/**
+	 * 
+	 * 此方法描述的是：添加${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * save
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/save")
+	public ResultInfo<?> save(@RequestBody ${className}Dto ${classname}) {
+		return ${classname}OpFacade.save(${classname});
+	}
+	/**
+	 * 
+	 * 此方法描述的是：编辑${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * update
+	 * @param ${classname}
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/update")
+	public ResultInfo<?> update(@RequestBody ${className}Dto ${classname}) {
+		return ${classname}OpFacade.update(${classname});
+	}	
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID${comments}
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delById
+	 * @param param
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/delById")
+	public ResultInfo<?> delById(@RequestBody Map<String, String> param) {
+		return ${classname}OpFacade.delById(param.get("userId"),param.get("id"));
+	}
+	
+	
+	/**
+	 * 
+	 * 此方法描述的是：根据ID批量删除系统
+	 * @author:     ${author}
+	 * @最后修改人： ${author}
+	 * @最后修改日期:${datetime}
+	 * @version:    1.0
+	 *
+	 * delByIds
+	 * @param map
+	 * @return ResultInfo<?>
+	 */
+	@RequestMapping(value = "/delByIds")
+	public ResultInfo<?> delByIds(@RequestBody Map<String, Object> map) {
+		return ${classname}OpFacade.delByIds(String.valueOf(map.get("userId")),(List<String>)map.get("ids"));
+	}
+	
+	
+	
+}
+
+

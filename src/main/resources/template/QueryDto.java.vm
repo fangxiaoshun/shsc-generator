@@ -1,0 +1,69 @@
+package ${package}.${projectName}.dto;
+
+import java.util.Date;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+/**
+ * ${comments}QueryDTO
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+@ApiModel("${comments}查询DTO")
+public class ${className}QueryDto {
+
+#foreach ($column in $columns)
+	/**
+     * $column.comments
+     */
+	@ApiModelProperty(value = "${column.comments}", notes = "${column.comments}", dataType = "${column.attrType}")
+    private $column.attrType $column.attrname;
+#end
+  
+    /**
+     * 页码
+     */
+	@ApiModelProperty(value = "页码", notes = "页码", dataType = "String")
+    private Integer pageNum=1;
+    /**
+     * 每页数据条数
+     */
+	@ApiModelProperty(value = "每页数据条数", notes = "每页数据条数", dataType = "String")
+    private Integer pageSize=10;
+
+
+#foreach ($column in $columns)
+	/**
+	 * 设置：${column.comments}
+	 */
+	public void set${column.attrName}($column.attrType $column.attrname) {
+		this.$column.attrname = $column.attrname;
+	}
+	/**
+	 * 获取：${column.comments}
+	 */
+	public $column.attrType get${column.attrName}() {
+		return $column.attrname;
+	}
+#end
+
+	public Integer getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(Integer pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+}

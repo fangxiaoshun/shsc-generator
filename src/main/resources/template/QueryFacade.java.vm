@@ -1,0 +1,17 @@
+/**
+ * ${className}QueryFacade.java
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+package ${package}.${projectName}.facade;
+
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.dto.${className}QueryDto;
+import com.shsc.paas.commons.ResultInfo;
+
+public interface ${className}QueryFacade {
+	ResultInfo<?> queryById(${className}Dto ${classname}Dto);
+	ResultInfo<?> queryList(${className}QueryDto ${classname}Dto);
+}

@@ -1,0 +1,57 @@
+package ${package}.${projectName}.mapper.dao;
+
+import java.util.List;
+import ${package}.${projectName}.dto.${className}Dto;
+import ${package}.${projectName}.mapper.entity.${className};
+
+/**
+ * ${comments}
+ * 
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ * Copyright 蜀海(北京)供应链管理有限责任公司 Corporation 2018
+ */
+public interface ${className}Mapper {
+	/**
+     *
+     * 根据主键ID删除数据
+     */
+    int deleteByPrimaryKey(${pk.attrType} ${pk.attrname});
+
+    /**
+     *
+     * 插入数据
+     */
+    int insert(${className} record);
+
+    /**
+     *
+     * 插入数据
+     */
+    int insertSelective(${className} record);
+
+    /**
+     *
+     * 根据主键ID查询数据
+     */
+    ${className} selectByPrimaryKey(${pk.attrType} ${pk.attrname});
+
+    /**
+     *
+     * 根据实体更新数据
+     */
+    int updateByPrimaryKeySelective(${className} record);
+
+     /**
+     *
+     * 根据实体更新数据
+     */
+    int updateByPrimaryKey(${className} record);
+    
+      /**
+     *
+     * 根据实体查询列表数据
+     */
+    List<${className}> queryList(${className}QueryDto ${classname}Dto);
+}
